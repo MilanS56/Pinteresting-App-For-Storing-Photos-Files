@@ -1,0 +1,69 @@
+📝 Pinteresting Project Notes
+1. What Do I Want to Make in This Project?
+
+A personal and secure image sharing app for my family.
+
+Alternative to Third Party Photo Sharing Apps – private & self-hosted.
+
+Features: Upload, View, Download, Delete, and Manage photos.
+
+Learning-focused project: To improve my full-stack development skills.
+
+2. What Files Do I Have in This Project?
+
+app.js → Main Express app configuration.
+
+routes/ → Routing logic:
+
+index.js → Handles main routes (home, upload, delete, profile).
+
+users.js → Handles authentication routes.
+
+models/ → Mongoose models:
+
+users.js → User schema for login/signup.
+
+posts.js → Post schema for uploaded images.
+
+public/ → Static assets:
+
+images/uploads/ → Stores uploaded photos.
+
+css/ → Stylesheets for frontend (profile.css etc).
+
+views/ → EJS templates:
+
+  index.ejs, profile.ejs, login.ejs, etc.
+
+multer.js → File upload configuration (storage path, filename).
+
+package.json → Project dependencies & scripts.
+
+3. What Packages Did I Have to Install?
+
+Backend & Server: express – Web framework: path
+
+Authentication: passport, passport-local, passport-local-mongoose – Login system.
+express-session, connect-flash – Session & flash messages.
+
+Database: mongoose – MongoDB ODM.
+
+File Upload: multer – Upload images.
+
+
+4. What Functionalities Did I Add?
+
+Authentication System: Signup, Login, Logout with Passport.js.
+
+Upload Feature: Upload images with Multer → stored in /public/images/uploads.
+
+Profile Page: Displays user’s uploaded images in a Masonry Grid layout.
+
+Delete Feature: Delete images from profile page.
+
+Download Feature: Download images directly from profile.
+
+Responsive UI: Styled with CSS (gradient background, custom buttons, cards).
+
+Session Management: Remember logged-in user until logout.
+
