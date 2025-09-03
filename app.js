@@ -23,7 +23,7 @@ app.use(flash());
 app.use(expressSession({
   resave:false,
   saveUninitialized:false,
-  secret:process.env.SESSION_SECRET
+  secret:process.env.SESSION_SECRET || "fallbacksecret"
 }));
 app.use(express.static("public"));
 app.use(passport.initialize());
