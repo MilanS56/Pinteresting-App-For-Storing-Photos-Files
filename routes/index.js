@@ -53,22 +53,40 @@ function isLoggedIn(req,res,next){
   res.redirect("/");
 };
 
-// Upload Functionality
-router.post("/upload",isLoggedIn, upload.single("file"), async function(req,res, next){
-  if(!req.file){
-    return res.status(404).send("File Not Found!");
+
+router.post("/upload", isLoggedIn, upload.single("file"), async function(req, res, next) {
+  try {
+    if (!req.file) {
+      return res.status(404).send("File Not Found!");
+    }
+
+    console.log("Upload route hit. User session:", req.session);
+    console.log("Passport user:", req.session.passport);
+    console.log("Req.user:", req.user);
+
+    const user = await userModel.findOne({ username: req.session.passport.user });
+    if (!user) {
+      console.error("User not found in DB for session:", req.session.passport.user);
+      return res.redirect("/login");
+    }
+
+    const post = await postModel.create({
+      image: req.file.filename,
+      imageText: req.body.caption,
+      user: user._id
+    });
+
+    user.posts.push(post._id);
+    await user.save();
+
+    console.log("Saved File:", req.file);
+    res.redirect("/profile");
+  } catch (err) {
+    console.error("Upload error:", err);
+    res.status(500).send("Upload Failed");
   }
-  const user=await userModel.findOne({username:req.session.passport.user});
-  const post= await postModel.create({
-    image:req.file.filename,
-    imageText:req.body.caption,
-    user:user._id
-  });
-  user.posts.push(post._id);
-  await user.save();
-  res.redirect("/profile");
-  console.log("Saved File",req.file);
 });
+
 
 //Download Functionality
 router.get("/download/:id", isLoggedIn, async function(req,res){

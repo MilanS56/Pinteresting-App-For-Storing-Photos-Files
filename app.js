@@ -11,11 +11,11 @@ var usersRouter = require('./routes/users');
 
 const expressSession=require('express-session');
 const passport=require("passport");
-const localStrategy=("passport-local");
+const localStrategy=require("passport-local");
 const flash=require('connect-flash');
 
 var app = express();
-
+app.set("trust proxy", 1);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -23,11 +23,17 @@ app.use(flash());
 app.use(expressSession({
   resave:false,
   saveUninitialized:false,
-  secret:process.env.SESSION_SECRET || "fallbacksecret"
+  secret:process.env.SESSION_SECRET || "fallbacksecret",
+   cookie: {
+    secure: process.env.NODE_ENV === "production", 
+    httpOnly:true,
+    sameSite:"lax" 
+  }
 }));
 app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
