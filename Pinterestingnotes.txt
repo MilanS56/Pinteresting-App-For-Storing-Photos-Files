@@ -67,3 +67,19 @@ Responsive UI: Styled with CSS (gradient background, custom buttons, cards).
 
 Session Management: Remember logged-in user until logout.
 
+SETTING UP CLOUDINARY
+1. MAKE ACCOUNT
+2. CLOUD NAME: drcsrcvia 
+3. API KEY: 892714222453714
+4. API SECRET: FWxCGLjya7B_HEPAtZkEXw8vKNA 
+5. Install Cloudinary on project: npm i cloudinary multer-storage-cloudinary
+6. Add environment variables in .env files in format as followed:
+  CLOUDINARY_CLOUD_NAME=your_cloud_name
+  CLOUDINARY_API_KEY=your_api_key
+  CLOUDINARY_API_SECRET=your_api_secret
+  CLOUDINARY_FOLDER=pinteresting
+
+7. Replace multerstorage with Cloudinary Storage
+  To do this replace the whole multer.js code with the code in multer.js file of pinteresting app.
+
+  

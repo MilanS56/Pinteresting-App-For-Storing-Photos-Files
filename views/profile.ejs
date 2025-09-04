@@ -31,11 +31,11 @@
     <div class="cards">
       <% user.posts.forEach(function(post){ %>
         <div class="card" style="width: 18rem;">
-          <img src="/images/uploads/<%= post.image%>" class="card-img-top" alt="<%= post.imageText%>">
+          <img src="<%= post.image%>" class="card-img-top" alt="<%= post.imageText%>">
           <div class="card-body">
            <h5 class="card-title"><%= post.imageText%></h5>
            <div class="del-down-btns">
-            <a href="/images/uploads/<%= post.image%>" download="<%= post.image %>" id="download"><img src="/images/download.svg" alt="Download Icon"></a>
+            <a href="<%= post.image%>" download="<%= post.image %>" id="download"><img src="/images/download.svg" alt="Download Icon"></a>
             <form action="/delete/<%= post._id %>" method="POST" style="display: inline;">
               <button type="submit" id="delete"><img src="/images/deletebtn.png" alt="Delete Icon"></button>
             </form>
